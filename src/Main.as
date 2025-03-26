@@ -1,11 +1,6 @@
 // c 2025-03-26
 // m 2025-03-26
 
-const string  pluginColor = "\\$FFF";
-const string  pluginIcon  = Icons::Arrows;
-Meta::Plugin@ pluginMeta  = Meta::ExecutingPlugin();
-const string  pluginTitle = pluginColor + pluginIcon + "\\$G " + pluginMeta.Name;
-
 Meta::Plugin@[] queue;
 
 void Main() {
@@ -25,6 +20,8 @@ void Main() {
 
 namespace Reloader {
     void ReloadMe() {
-        queue.InsertLast(Meta::ExecutingPlugin());
+        Meta::Plugin@ executing = Meta::ExecutingPlugin();
+        if (queue.FindByRef(executing) == -1)
+            queue.InsertLast(executing);
     }
 }
