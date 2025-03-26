@@ -4,12 +4,19 @@
 Meta::Plugin@[] queue;
 
 void Main() {
+    string id;
+    uint64 start;
+
     while (true) {
         yield();
 
         while (queue.Length > 0) {
-            if (queue[0] !is null)
+            if (queue[0] !is null) {
+                id = queue[0].ID;
+                start = Time::Now;
                 Meta::ReloadPlugin(queue[0]);
+                warn("reloading " + id + " took " + (Time::Now - start) + "ms");
+            }
 
             queue.RemoveAt(0);
 
