@@ -29,6 +29,6 @@ namespace Reloader {
     void ReloadMe() {
         Meta::Plugin@ executing = Meta::ExecutingPlugin();
         if (queue.FindByRef(executing) == -1)
-            queue.InsertLast(executing);
+            queue.InsertLast(@executing);
     }
 }
